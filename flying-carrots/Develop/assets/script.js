@@ -61,7 +61,7 @@ for (var i = 0; i < times.length; i++) {
     var inputSchedule = $('<input>');
         inputSchedule.attr('text')
         inputSchedule.addClass('textarea');
-        inputSchedule.attr('data-number', times[i])
+        inputSchedule.attr('data-number', milTimes[i])
         inputSchedule.css('width', '70%');   
         
 
@@ -105,36 +105,33 @@ function timeTracker() {
     var currentHour = moment().hour();
 
     console.log(currentHour);
-    let allElems = [];
+    
         for (let i = 0; i < milTimes.length; i++) {
         var hourTime = milTimes[i];
-        var elem = $(hourTime);
-
-        allElems.push(elem)
-console.log(allElems);
         console.log(hourTime);
         
         console.log($(".row"));
+    $(".row").each(function() {
         // Add class based on current time
         if (hourTime < currentHour ) {
-            elem.removeClass("future");
-            elem.removeClass("present");
-            elem.addClass("past");
+            $(this).removeClass("future");
+            $(this).removeClass("present");
+            $(this).addClass("past");
             console.log(hourTime);
 
         } else if (hourTime == currentHour) {
-            elem.removeClass("future");
-            elem.removeClass("past");
-            elem.addClass("present");
+            $(this).removeClass("future");
+            $(this).removeClass("past");
+            $(this).addClass("present");
             console.log(hourTime);
-        } else {
-            elem.removeClass("past");
-            elem.removeClass("present");
-            elem.addClass("future");
+        } else if (hourTime > currentHour) {
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+            $(this).addClass("future");
             console.log(hourTime);
         }
-    };
+    });
 }
-
+}
 
 timeTracker();
