@@ -12,42 +12,25 @@ setInterval(update, 1000);
 var containerElement = $('div');
     containerElement.css('width', '100%')
     containerElement.addClass('description')
+
+//Array for times
 var times = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+//Array for military time values
 var milTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 console.log(times)
 
-//Object for military time value
-/*const milTimes = {
-           9: 9,
-           10: 10,
-           11: 11,
-           12: 12,
-           1: 13,
-           2: 14,
-           3: 15,
-           4: 16,
-           5: 17
-                };
-    
-var regHours = Object.keys(milTimes);
-    console.log(regHours);
-    
-var milHours = Object.values(milTimes);
-    
-    console.log(milHours);
 
-    console.log(Object.keys(milTimes));*/
 
 //  Add a div for each work day hour
-
-
 for (var i = 0; i < times.length; i++) {
 
+    var savedTasks = JSON.parse(localStorage.getItem("block"));
+    console.log(savedTasks);
         // Time Block Div
     var timeBlockElement = $('<div>');
     timeBlockElement.addClass('row time-block');
-    timeBlockElement.attr('id', milTimes[i]);
-    console.log(timeBlockElement["id"])
+
+    console.log(timeBlockElement)
         // Hour
     var timeHour = $('<p>');
         timeHour.addClass('hour')
@@ -60,12 +43,15 @@ for (var i = 0; i < times.length; i++) {
         // Event
     var inputSchedule = $('<input>');
         inputSchedule.attr('text')
-        inputSchedule.addClass('textarea');
+        inputSchedule.addClass('textarea input');
         inputSchedule.attr('data-number', milTimes[i])
         inputSchedule.css('width', '70%');   
         
-
-        // inputSchedule.addId('hours').foreach('')
+    var listTask = $('<li>');
+        listTask.addClass('listTask');
+        listTask.attr('data-number', milTimes[i]);
+        listTask.text(savedTasks[i].taskName);
+       
     var myTasks = [];
         // Save Button
     var saveButton = $('<button>');
@@ -77,12 +63,13 @@ for (var i = 0; i < times.length; i++) {
 
             var text = $(this).siblings('.textarea').val();
             
-            var time = $(this).siblings('.hour').text().trim();
+            var time = $(this).siblings('.textarea').attr("data-number");
 
             var block = {
                 timeAt: time,
                 taskName: text
             }
+
 
             console.log(block);
             myTasks.push(block);
@@ -91,6 +78,8 @@ for (var i = 0; i < times.length; i++) {
             localStorage.setItem("block", JSON.stringify(myTasks));
         });
        
+        var savedTasks = JSON.parse(localStorage.getItem("block"));
+        console.log(savedTasks);
     
         // Appending
     containerElement.append(timeBlockElement)
@@ -105,14 +94,14 @@ function timeTracker() {
     var currentHour = moment().hour();
 
     console.log(currentHour);
-    
-        for (let i = 0; i < milTimes.length; i++) {
-        var hourTime = milTimes[i];
-        console.log(hourTime);
         
         console.log($(".row"));
-    $(".row").each(function() {
+
+    $(".textarea").each(function() {
+        
+        var hourTime = $(this).attr("data-number");
         // Add class based on current time
+        
         if (hourTime < currentHour ) {
             $(this).removeClass("future");
             $(this).removeClass("present");
@@ -131,7 +120,6 @@ function timeTracker() {
             console.log(hourTime);
         }
     });
-}
 }
 
 timeTracker();
