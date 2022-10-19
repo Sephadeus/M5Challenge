@@ -5,7 +5,7 @@
 This project is a work schedule task manager. The purpose of this project was to utilize the interactivity of JavaScript to help users organize their tasks for the day and color code which are past, present or future which is determined by the current time, acquired using Moment.js.
 
 ## Visuals
-Check out the screenshot here --> 
+Check out the screenshot here --> ![2022-10-17 20 35 20 127 0 0 1 9939d6b4b831](https://user-images.githubusercontent.com/90430093/196308500-b0f7908b-e0e7-4ab7-9deb-868045bc423e.png)
 
 ## Installation
 This project is a webpage which requires no installation. Simply click the URL on Github or copy and paste this link --> (https://sephadeus.github.io/M5Challenge/) to navigate to the webpage on the browser.
